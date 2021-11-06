@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>主要経済・金融指標</title>
+    <link href="../static/css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<header>
+    <h1>主要経済・金融指標</h1>
+</header>
+<body>
+    <h5 class="attention">※米国国債10年は日経新聞の値と異なる場合があります。</h5>
+    <h5 class="attention">スマホの方は横向きでご覧ください。</h5>
+    <table>
+        <tr>
+        {% for i in range(9) %}
+           <th>{{ header[i] }}</th>
+        {% endfor %}
+        </tr>
+        {% for i in record: %}
+            <tr>
+            {% for j in range(9): %}
+                <td>{{ i[j] }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+<footer>
+    <h5>© 2021 Takumi Nishimura All rights reserved.</h5>
+</footer>
+</html>
