@@ -38,7 +38,7 @@ def GetIndicator(url,days,fromRight,dateFormat):
         return ''
 
 nikkeiStockAverage = GetIndicator('https://s.minkabu.jp/stock/100000018/daily_bar',1,4,'%Y/%m/%d')
-iyoginStockAverage = re.findall('\d{3}',GetIndicator('https://s.minkabu.jp/stock/8385/daily_bar',1,4,'%Y/%m/%d')).strip('[]')
+iyoginStockAverage = re.findall('\d{3}',GetIndicator('https://s.minkabu.jp/stock/8385/daily_bar',1,4,'%Y/%m/%d'))[0]
 nyDow = GetIndicator('https://nikkeiyosoku.com/nydow/data/',2,4,'%Y/%m/%d')
 japaneseGovernmentBonds10 = GetIndicator('https://www.bb.jbts.co.jp/ja/historical/main_rate.html',1,4,'%Y/%m/%d')
 usGovernmentBonds10 = GetIndicator('https://irbank.net/usa/10year',2,1,'%m/%d')
