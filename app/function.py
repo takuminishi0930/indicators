@@ -51,7 +51,7 @@ def GetDollarYenEuroYen():
             euroYen = ''
     return dollarYen,euroYen
 
-def csv():
+def csv(nikkeiStockAverage,iyoginStockAverage,nyDow,dollarYen,euroYen,japaneseGovernmentBonds10,usGovernmentBonds10,WTI):
     csv = pandas.read_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')),index_col=0,dtype=str)
     if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
         csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''

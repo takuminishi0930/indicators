@@ -7,4 +7,4 @@ japaneseGovernmentBonds10 = GetIndicator('https://www.bb.jbts.co.jp/ja/historica
 usGovernmentBonds10 = GetIndicator('https://irbank.net/usa/10year',1,'%m/%d')
 WTI = GetIndicator('https://jp.investing.com/commodities/crude-oil-historical-data',1,'%Y年%m月%d日')
 dollarYen,euroYen = GetDollarYenEuroYen()
-csv()
+csv(nikkeiStockAverage,iyoginStockAverage,nyDow,dollarYen,euroYen,japaneseGovernmentBonds10,usGovernmentBonds10,WTI)
