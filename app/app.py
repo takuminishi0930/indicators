@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request
 import pandas as pd
 import datetime
+from dateutil.relativedelta import relativedelta
 #Flaskオブジェクトの生成
 app = Flask(__name__)
 
@@ -18,9 +19,9 @@ def home():
 def indicators():
     date = request.form.get("d")
     if request.form.get("b")=="":
-        month = date-datetime.timedelta(month=1)
+        month = date-relativedelta(month=1)
     elif request.form.get("n")=="":
-        month = date+datetime.timedelta(month=1)
+        month = date+relativedelta(month=1)
     df = pd.read_csv('app/static/csv/{}.csv'.format(month.strftime('%Y-%m'), encoding="utf-8"))
     header = df.fillna('').columns.tolist()
     record = df.fillna('').values.tolist()
