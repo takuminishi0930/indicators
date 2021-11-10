@@ -22,7 +22,7 @@ def indicators():
         date = date-relativedelta(months=1)
     elif request.form.get("n")=="":
         date = date+relativedelta(months=1)
-    df = pd.read_csv('app/static/csv/{}.csv'.format(month.strftime('%Y-%m'), encoding="utf-8"))
+    df = pd.read_csv('app/static/csv/{}.csv'.format(date.strftime('%Y-%m'), encoding="utf-8"))
     header = df.fillna('').columns.tolist()
     record = df.fillna('').values.tolist()
     MAX = list(df.max())
