@@ -21,9 +21,9 @@
         {% for i in record: %}
             <tr>
             {% for j in range(9): %}
-                {% if j in MAX %}
+                {% if float(j) in MAX %}
                     <td style="color:red">{{ i[j] }}</td>
-                {% elif j in MIN %}
+                {% elif float(j) in MIN %}
                     <td style="color:blue">{{ i[j] }}</td>
                 {% else %}
                     <td>{{ i[j] }}</td>
