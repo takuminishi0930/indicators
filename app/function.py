@@ -6,6 +6,7 @@ import re
 import urllib.request
 import os
 import datetime
+import os
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
 today = datetime.date.today()
@@ -52,40 +53,45 @@ def GetDollarYenEuroYen():
     return dollarYen,euroYen
 
 def csv(nikkeiStockAverage,iyoginStockAverage,nyDow,dollarYen,euroYen,japaneseGovernmentBonds10,usGovernmentBonds10,WTI):
-    csv = pandas.read_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')),index_col=0,dtype=str)
-    if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
-        csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''
-        csv.at['{}'.format(twoDaysAgo),'当行株価'] = ''
-        csv.at['{}'.format(twoDaysAgo),'NYダウ'] = ''
-        csv.at['{}'.format(twoDaysAgo),'対米ドル'] = ''
-        csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = ''
-        csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = ''
-        csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = ''
-        csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = ''
-    elif today.strftime('%A')=='Tuesday':
-        csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''
-        csv.at['{}'.format(twoDaysAgo),'当行株価'] = ''
-        csv.at['{}'.format(twoDaysAgo),'NYダウ'] = ''
-        csv.at['{}'.format(twoDaysAgo),'対米ドル'] = ''
-        csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = ''
-        csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = ''
-        csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = ''
-        csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = ''
-        csv.at['{}'.format(fourDaysAgo),'日経平均'] = nikkeiStockAverage
-        csv.at['{}'.format(fourDaysAgo),'当行株価'] = iyoginStockAverage
-        csv.at['{}'.format(fourDaysAgo),'NYダウ'] = nyDow
-        csv.at['{}'.format(fourDaysAgo),'対米ドル'] = dollarYen
-        csv.at['{}'.format(fourDaysAgo),'対ユーロ'] = euroYen
-        csv.at['{}'.format(fourDaysAgo),'日本国債10年'] = japaneseGovernmentBonds10
-        csv.at['{}'.format(fourDaysAgo),'米国国債10年'] = usGovernmentBonds10 
-        csv.at['{}'.format(fourDaysAgo),'WTI先物期近物'] = WTI
+    if os.path.exists('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')))==True:
+        csv = pandas.read_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')),index_col=0,dtype=str)
+        if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
+            csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''
+            csv.at['{}'.format(twoDaysAgo),'当行株価'] = ''
+            csv.at['{}'.format(twoDaysAgo),'NYダウ'] = ''
+            csv.at['{}'.format(twoDaysAgo),'対米ドル'] = ''
+            csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = ''
+            csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = ''
+            csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = ''
+            csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = ''
+        elif today.strftime('%A')=='Tuesday':
+            csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''
+            csv.at['{}'.format(twoDaysAgo),'当行株価'] = ''
+            csv.at['{}'.format(twoDaysAgo),'NYダウ'] = ''
+            csv.at['{}'.format(twoDaysAgo),'対米ドル'] = ''
+            csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = ''
+            csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = ''
+            csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = ''
+            csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = ''
+            csv.at['{}'.format(fourDaysAgo),'日経平均'] = nikkeiStockAverage
+            csv.at['{}'.format(fourDaysAgo),'当行株価'] = iyoginStockAverage
+            csv.at['{}'.format(fourDaysAgo),'NYダウ'] = nyDow
+            csv.at['{}'.format(fourDaysAgo),'対米ドル'] = dollarYen
+            csv.at['{}'.format(fourDaysAgo),'対ユーロ'] = euroYen
+            csv.at['{}'.format(fourDaysAgo),'日本国債10年'] = japaneseGovernmentBonds10
+            csv.at['{}'.format(fourDaysAgo),'米国国債10年'] = usGovernmentBonds10 
+            csv.at['{}'.format(fourDaysAgo),'WTI先物期近物'] = WTI
+        else:
+            csv.at['{}'.format(twoDaysAgo),'日経平均'] = nikkeiStockAverage
+            csv.at['{}'.format(twoDaysAgo),'当行株価'] = iyoginStockAverage
+            csv.at['{}'.format(twoDaysAgo),'NYダウ'] = nyDow
+            csv.at['{}'.format(twoDaysAgo),'対米ドル'] = dollarYen
+            csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = euroYen
+            csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = japaneseGovernmentBonds10
+            csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = usGovernmentBonds10 
+            csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = WTI
+        csv.to_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')))
     else:
-        csv.at['{}'.format(twoDaysAgo),'日経平均'] = nikkeiStockAverage
-        csv.at['{}'.format(twoDaysAgo),'当行株価'] = iyoginStockAverage
-        csv.at['{}'.format(twoDaysAgo),'NYダウ'] = nyDow
-        csv.at['{}'.format(twoDaysAgo),'対米ドル'] = dollarYen
-        csv.at['{}'.format(twoDaysAgo),'対ユーロ'] = euroYen
-        csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = japaneseGovernmentBonds10
-        csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = usGovernmentBonds10 
-        csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = WTI
-    csv.to_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')))
+        columns = ['日付','日経平均','当行株価','NYダウ','対米ドル','対ユーロ','日本国債10年','米国国債10年','WTI先物期近物']
+        df = pandas.DataFrame(data=[[twoDaysAgo,nikkeiStockAverage,iyoginStockAverage,nyDow,dollarYen,euroYen,japaneseGovernmentBonds10,usGovernmentBonds10,WTI]],columns=columns)
+        df.to_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')),index=False)
