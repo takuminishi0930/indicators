@@ -27,7 +27,7 @@ def indicators():
     record = df.fillna('').values.tolist()
     MAX = list(df.max())
     MIN = list(df.min())
-    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=date.strftime('%Y-%m-%d'))
+    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=date.strftime("%Y-%m-%d"))
 
 if __name__ == '__main__':
     app.run()
