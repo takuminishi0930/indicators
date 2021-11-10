@@ -13,7 +13,7 @@ def home():
     record = df.fillna('').values.tolist()
     MAX = list(df.max())
     MIN = list(df.min())
-    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=twoDaysAgo)
+    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=twoDaysAgo.date())
 
 @app.route("/indicators",methods=["POST"])
 def indicators():
@@ -27,7 +27,7 @@ def indicators():
     record = df.fillna('').values.tolist()
     MAX = list(df.max())
     MIN = list(df.min())
-    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=month)
+    return render_template('index.html',header=header, record=record,MAX=MAX,MIN=MIN,date=month.date())
 
 if __name__ == '__main__':
     app.run()
