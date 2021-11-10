@@ -21,12 +21,9 @@
         {% for i in record: %}
             <tr>
             {% for j in range(9): %}
-                {% if i[j] in MAX and j!=0 %}
-                    <td style="color:red">{{ i[j] }}</td>
-                {% else %}
-                    <td>{{ i[j] }}</td>
-                {% endif %}
                 {% if i[j] in MIN and j!=0 %}
+                    <td style="color:red">{{ i[j] }}</td>
+                {% elif i[j] in MAX and j!=0 %}
                     <td style="color:blue">{{ i[j] }}</td>
                 {% else %}
                     <td>{{ i[j] }}</td>
