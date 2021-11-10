@@ -19,9 +19,9 @@ def home():
 def indicators():
     date = datetime.datetime.strptime(request.form.get("d"),"%Y-%m-%d")
     if request.form.get("b")=="":
-        month = date-relativedelta(month=1)
+        month = date-relativedelta(months=1)
     elif request.form.get("n")=="":
-        month = date+relativedelta(month=1)
+        month = date+relativedelta(months=1)
     df = pd.read_csv('app/static/csv/{}.csv'.format(month.strftime('%Y-%m'), encoding="utf-8"))
     header = df.fillna('').columns.tolist()
     record = df.fillna('').values.tolist()
