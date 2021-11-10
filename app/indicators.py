@@ -6,6 +6,7 @@ import re
 import urllib.request
 import os
 import datetime
+from function import *
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
 today = datetime.date.today()
@@ -13,22 +14,6 @@ yesterday = datetime.date.today()-datetime.timedelta(days=1)
 twoDaysAgo = datetime.date.today()-datetime.timedelta(days=2)
 threeDaysAgo = datetime.date.today()-datetime.timedelta(days=3)
 fourDaysAgo = datetime.date.today()-datetime.timedelta(days=4)
-
-#daysは最新の指標が1日前か2日前か、fromRightは日付インデックスから何個右が該当指標か、formatは日付の形式
-def GetIndicator(url,fromRight,dateFormat):
-    tempIndicator = BeautifulSoup(requests.get(url,headers=headers).text,'html5lib')('td')
-    tempIndex = ''
-    for index,i in enumerate(tempIndicator):
-        if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
-            tempIndex = ''
-        elif today.strftime('%A')=='Tuesday' and fourDaysAgo.strftime(dateFormat)==i.get_text():
-            tempIndex = index
-        elif twoDaysAgo.strftime(dateFormat)==i.get_text():
-            tempIndex = index 
-    if tempIndex!='':
-        return tempIndicator[tempIndex+fromRight].get_text()
-    else:
-        return ''
 
 nikkeiStockAverage = str(GetIndicator('https://s.minkabu.jp/stock/100000018/daily_bar',4,'%Y/%m/%d')).replace(',','')
 iyoginStockAverage = GetIndicator('https://s.minkabu.jp/stock/8385/daily_bar',4,'%Y/%m/%d')
@@ -56,7 +41,7 @@ else:
         dollarYen = ''
         euroYen = ''
 
-csv = pandas.read_csv('static/csv/indicators.csv',index_col=0,dtype=str)
+csv = pandas.read_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')),index_col=0,dtype=str)
 if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
     csv.at['{}'.format(twoDaysAgo),'日経平均'] = ''
     csv.at['{}'.format(twoDaysAgo),'当行株価'] = ''
@@ -92,4 +77,4 @@ else:
     csv.at['{}'.format(twoDaysAgo),'日本国債10年'] = japaneseGovernmentBonds10
     csv.at['{}'.format(twoDaysAgo),'米国国債10年'] = usGovernmentBonds10 
     csv.at['{}'.format(twoDaysAgo),'WTI先物期近物'] = WTI
-csv.to_csv('static/csv/indicators.csv')
+csv.to_csv('static/csv/{}.csv'.format(twoDaysAgo.strftime('%Y-%m')))
