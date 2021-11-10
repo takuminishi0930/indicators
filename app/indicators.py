@@ -53,8 +53,8 @@ if partURL!='':
     with open(str(re.findall('fx\d{6}.pdf',URL)),'rb') as f:
         result = re.findall('\d{3}[.]\d{2}[-]\d{2}',PyPDF2.PdfFileReader(f).getPage(0).extractText())
     if today.strftime('%A')!='Sunday' and today.strftime('%A')!='Saturday':
-        dollarYen = result[2]
-        euroYen = result[3]
+        dollarYen = result[2][:4]+result[2][-2:]
+        euroYen = result[3][:4]+result[3][-2:]
     else:
         dollarYen = ''
         euroYen = ''
