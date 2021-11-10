@@ -21,11 +21,11 @@
         {% for i in record: %}
             <tr>
             {% for j in range(9): %}
-                {% if j in MAX: %}
+                {% if j in MAX %}
                     <td id="red">{{ i[j] }}</td>
-                {% elif j in MIN: %}
+                {% elif j in MIN %}
                     <td id="blue">{{ i[j] }}</td>
-                {% else: %}
+                {% else %}
                     <td>{{ i[j] }}</td>
                 {% endif %}
             {% endfor %}
