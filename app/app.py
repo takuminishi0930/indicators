@@ -17,7 +17,7 @@ def home():
 
 @app.route("/indicators",methods=["POST"])
 def indicators():
-    date = request.form.get("d")
+    date = datetime.datetime.strptime(request.form.get("d"),"%Y-%m-%d")
     if request.form.get("b")=="":
         month = date-relativedelta(month=1)
     elif request.form.get("n")=="":
