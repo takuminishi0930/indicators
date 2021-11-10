@@ -22,11 +22,11 @@
             <tr>
             {% for j in range(9): %}
                 {% if j in MAX %}
-                    <td id="red">{{ i[j] }}</td>
+                    <td style="color:red">{{ i[j] }}</td>
                 {% elif j in MIN %}
-                    <td id="blue">{{ i[j] }}</td>
+                    <td style="color:blue">{{ i[j] }}</td>
                 {% else %}
-                    <td style="color:purple">{{ i[j] }}</td>
+                    <td>{{ i[j] }}</td>
                 {% endif %}
             {% endfor %}
             </tr>
