@@ -20,7 +20,8 @@ def GetIndicator(url,fromRight,dateFormat):
         if oneWeekAgo.strftime('%A')=='Saturday' or oneWeekAgo.strftime('%A')=='Sunday':
             tempIndex = ''
         elif oneWeekAgo.strftime(dateFormat)==i.get_text():
-            tempIndex = index 
+            tempIndex = index
+            break
     if tempIndex!='':
         return tempIndicator[tempIndex+fromRight].get_text()
     else:

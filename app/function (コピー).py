@@ -25,8 +25,10 @@ def GetIndicator(url,fromRight,dateFormat):
             tempIndex = ''
         elif today.strftime('%A')=='Tuesday' and fourDaysAgo.strftime(dateFormat)==i.get_text():
             tempIndex = index
+            break
         elif twoDaysAgo.strftime(dateFormat)==i.get_text():
             tempIndex = index 
+            break
     if tempIndex!='':
         return tempIndicator[tempIndex+fromRight].get_text()
     else:
