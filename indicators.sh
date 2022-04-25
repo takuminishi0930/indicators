@@ -4,4 +4,4 @@ cd /home/takumi/program/indicators
 git add .
 git commit -m "modified"
 git push
-git push heroku main
+#git push heroku main
