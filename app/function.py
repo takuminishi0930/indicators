@@ -23,6 +23,14 @@ def GetLatestDay():
     for i in csv.index:
         if latestDay==0 or latestDay<i:
             latestDay=i
+    latestDay = datetime.datetime.strptime(latestDay, '%Y-%m-%d').date()
+
+def GetSearchDay():
+    searchDay=[]
+    date = fiveDaysAgo
+    while date>GetLatestDay():
+        searchDay.append(date)
+        date = date-datetime.timedelta(days=1)
 
 #daysは最新の指標が1日前か2日前か、fromRightは日付インデックスから何個右が該当指標か、formatは日付の形式
 def GetIndicator(url,fromRight,dateFormat,date):
