@@ -6,40 +6,29 @@ import re
 import urllib.request
 import os
 import datetime
-import pandas as pd
+import os
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
-fiveDaysAgo = datetime.date.today()-datetime.timedelta(days=5)
-
-def GetLatestDay():
-    latestDay=0
-    for i in os.listdir("./static/csv"):
-        date = os.path.splitext(os.path.basename(i))[0]
-        if latestDay==0 or latestDay<date:
-            latestDay = date
-    csv = pd.read_csv("static/csv/{}.csv".format(latestDay),index_col=0)
-    csv.index
-    latestDay=0
-    for i in csv.index:
-        if latestDay==0 or latestDay<i:
-            latestDay=i
-    latestDay = datetime.datetime.strptime(latestDay, '%Y-%m-%d').date()
-
-def GetSearchDay():
-    searchDay=[]
-    date = fiveDaysAgo
-    while date>GetLatestDay():
-        searchDay.append(date)
-        date = date-datetime.timedelta(days=1)
+today = datetime.date.today()
+yesterday = datetime.date.today()-datetime.timedelta(days=1)
+twoDaysAgo = datetime.date.today()-datetime.timedelta(days=2)
+threeDaysAgo = datetime.date.today()-datetime.timedelta(days=3)
+fourDaysAgo = datetime.date.today()-datetime.timedelta(days=4)
+oneWeekAgo = datetime.date.today()-datetime.timedelta(days=7)
 
 #daysは最新の指標が1日前か2日前か、fromRightは日付インデックスから何個右が該当指標か、formatは日付の形式
-def GetIndicator(url,fromRight,dateFormat,date):
+def GetIndicator(url,fromRight,dateFormat):
     tempIndicator = BeautifulSoup(requests.get(url,headers=headers).text,'html5lib')('td')
     tempIndex = ''
     for index,i in enumerate(tempIndicator):
-        if date.strftime(dateFormat)==i.get_text():
+        if today.strftime('%A')=='Monday' or today.strftime('%A')=='Sunday':
+            tempIndex = ''
+        elif today.strftime('%A')=='Tuesday' and fourDaysAgo.strftime(dateFormat)==i.get_text():
+            tempIndex = index
+            break
+        elif twoDaysAgo.strftime(dateFormat)==i.get_text():
             tempIndex = index 
-        break
+            break
     if tempIndex!='':
         return tempIndicator[tempIndex+fromRight].get_text()
     else:
